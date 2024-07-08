@@ -41,7 +41,8 @@ def play_game(secret_word):
     # guess = guess.lower()
 
     for symbol in secret_word:
-        while guess := input("Type a single letter here, then press enter: "):
+        for i in range(INITIAL_GUESSES):
+            guess = input("Type a single letter here, then press enter: ")
             if guess.upper() in secret_word:
                 symbol = symbol.replace("-", guess.upper())
                 print("That guess is correct.")
@@ -58,7 +59,7 @@ def play_game(secret_word):
                 print("You have " + str(guess_count) + " guesses left")
 
                 
-    if string == secret_word and guess_count >= 0:
+    if string == secret_word:
         print("Congratulations, the word is: " + secret_word)
     else:
         print("Sorry, you lost. The secret word was: " + secret_word)
