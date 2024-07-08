@@ -12,42 +12,56 @@ LEXICON_FILE = "Lexicon.txt"    # File to read word list from
 INITIAL_GUESSES = 8             # Initial number of guesses player starts with
 
 
+# def transform_word(secret_word):
+#     for symbol in secret_word:
+#         return secret_word.replace(symbol, '-')
+    
+#     print(transform_word(secret_word))
+
 def play_game(secret_word):
     """
     Add your code (remember to delete the "pass" below)
     """
 
-    len(secret_word)
-    secret_word.replace(symbol, "-") 
+    print(secret_word)
 
-    print("The word now looks like this: " + "")
-    print("You have " + INITIAL_GUESSES +  " guesses left")
-    guess = "abcdefghijklmnopqrstuvwxyz"
-    # guess.isalpha().lower()
+    # the original string is immutable, need to assign to a new string
+    string = secret_word
+    for symbol in string:
+        string = string.replace(symbol, '-')
+    print(string)
+
+    print("The word now looks like this: " + string)
+    print("You have " + str(INITIAL_GUESSES) + " guesses left")
+
+    # guess = "abcdefghijklmnopqrstuvwxyz"
     guess_count = INITIAL_GUESSES
 
-    if guess == symbol:
-        guess.replace("-", guess)
+    secret_word = secret_word.upper()
+    # guess = guess.lower()
 
     for symbol in secret_word:
-        while guess == input("Type a single letter here, then press enter: "):
-            if guess.lower() == symbol:
+        while guess := input("Type a single letter here, then press enter: "):
+            if guess.upper() in secret_word:
+                symbol = symbol.replace("-", guess.upper())
                 print("That guess is correct.")
                 print("The word now looks like this: " + "")
-                print("You have " + guess_count + " guesses left")
-            if guess.lower() != symbol or guess.lower() is not guess.isalpha():
+                print("You have " + str(guess_count) + " guesses left")
+            if len(guess) == 1 and guess and guess.upper() not in secret_word:
                 guess_count -= 1
-                print("There are no " + guess + " 's in the word")
+                print("There are no " + guess + "'s in the word")
                 print("The word now looks like this: " + "")
-                print("You have " + guess_count + " guesses left")
-            if len(guess.lower()) >= 2:
+                print("You have " + str(guess_count) + " guesses left")
+            if len(guess) > 1:
                 print("Guess should only be a single character.")
                 print("The word now looks like this: " + "")
-                print("You have " + guess_count + " guesses left")
-                
+                print("You have " + str(guess_count) + " guesses left")
 
-    print("Congratulations, the word is: " + secret_word)
-    print("Sorry, you lost. The secret word was: " + secret_word)
+                
+    if string == secret_word and guess_count >= 0:
+        print("Congratulations, the word is: " + secret_word)
+    else:
+        print("Sorry, you lost. The secret word was: " + secret_word)
 
 
 def get_word():
