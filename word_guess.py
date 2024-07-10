@@ -47,9 +47,9 @@ def play_game(secret_word):
         if len(guess) == 1 and guess.upper() in secret_word:
             # symbol = guess.upper()
             # for symbol in secret_word:
-            update_string = string.update('-', guess.upper())
+            # update_string = string.update('-', guess.upper())
             print("That guess is correct.")
-            print("The word now looks like this: " + update_string)
+            print("The word now looks like this: " + "")
             print("You have " + str(guess_count) + " guesses left")
         if len(guess) == 1 and guess and guess.upper() not in secret_word:
             # guess_count >= 0

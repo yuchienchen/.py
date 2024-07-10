@@ -41,27 +41,31 @@ def play_game(secret_word):
     # guess = guess.lower()
 
     for symbol in secret_word:
-        for i in range(INITIAL_GUESSES):
-            guess == input("Type a single letter here, then press enter: ")
-            if guess.upper() in secret_word:
-                symbol = symbol.replace("-", guess.upper())
-                print("That guess is correct.")
-                print("The word now looks like this: " + "")
-                print("You have " + str(guess_count) + " guesses left")
-            if len(guess) == 1 and guess and guess.upper() not in secret_word:
-                guess_count -= 1
-                print("There are no " + guess + "'s in the word")
-                print("The word now looks like this: " + "")
-                print("You have " + str(guess_count) + " guesses left")
-            if len(guess) > 1:
-                print("Guess should only be a single character.")
-                print("The word now looks like this: " + "")
-                print("You have " + str(guess_count) + " guesses left")
+        # no while loop needed: the initial guesses have been defined already
+        guess = input("Type a single letter here, then press enter: ")
+        # length of the correct guess needs to be defined, otherwise conflict with 'if'#3, "eg: one of the double inputs matches the secret_word"
+        if len(guess) == 1 and guess.upper() in secret_word:
+            # symbol = guess.upper()
+            # for symbol in secret_word:
+            update_string = string.update('-', guess.upper())
+            print("That guess is correct.")
+            print("The word now looks like this: " + update_string)
+            print("You have " + str(guess_count) + " guesses left")
+        if len(guess) == 1 and guess and guess.upper() not in secret_word:
+            # guess_count >= 0
+            guess_count -= 1
+            print("There are no " + guess + "'s in the word")
+            print("The word now looks like this: " + "")
+            print("You have " + str(guess_count) + " guesses left")
+        if len(guess) > 1:
+            print("Guess should only be a single character.")
+            print("The word now looks like this: " + "")
+            print("You have " + str(guess_count) + " guesses left")
 
                 
-    if string == secret_word:
+    if string == secret_word and guess_count >= 0:
         print("Congratulations, the word is: " + secret_word)
-    else:
+    if string != secret_word and guess_count <= 0 :
         print("Sorry, you lost. The secret word was: " + secret_word)
 
 
